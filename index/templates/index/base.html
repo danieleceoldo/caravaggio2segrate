@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <title>
+            Caravaggio 2
+        </title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="<Short Term Apartment Rental">
+        <meta name="author=" content="Daniele Ceoldo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet"
+              href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            body,h1,h2,h3,h4,h5,h6 {
+                font-family: "Raleway", Arial, Helvetica, sans-serif}
+            .mySlides {display:none}
+        </style>
+
+    </head>
+
+    <body class="w3-content w3-border-left w3-border-right">
+
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
+          <div class="w3-container w3-display-container w3-padding-16">
+            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
+            <h4>Short Term</h4>
+            <h3>Apartment Rental</h3>
+            <h3>from &euro;150 <span class="w3-medium">per night</span></h3>
+            <hr>
+            <form action="{% url 'index:checkavail' %}" method="post">
+              {% csrf_token %}
+              <p><label><i class="fa fa-calendar-check-o"></i> Check In</label></p>
+              <input class="w3-input w3-border" 
+                     type="text" placeholder="DD MM YYYY" 
+                     {% block checkin_defval %}{% endblock %}
+                     name="CheckIn" required>
+              <p><label><i class="fa fa-calendar-o"></i> Check Out</label></p>
+              <input class="w3-input w3-border"
+                     type="text" placeholder="DD MM YYYY"
+                     {% block checkout_defval %}{% endblock %}
+                     name="CheckOut" required>
+              <p><label><i class="fa fa-male"></i> Adults</label></p>
+              <input class="w3-input w3-border"
+                     type="number"
+                     {% block adults_defval %}{% endblock %}
+                     name="Adults" min="1" max="6">
+              <p><label><i class="fa fa-child"></i> Kids</label></p>
+              <input class="w3-input w3-border"
+                     type="number"
+                     {% block kids_defval %}{% endblock %}
+                     name="Kids" min="0" max="6">
+              <p><button class="w3-button w3-block w3-green w3-left-align"
+                         type="submit">
+                  <i class="fa fa-search w3-margin-right"></i> Check availability</button></p>
+            </form>
+          </div>
+          <div class="w3-bar-block">
+            <a href="#apartment" class="w3-bar-item w3-button w3-padding-16"><i class="fa fa-building"></i> Apartment</a>
+            <a href="#contact-us" class="w3-bar-item w3-button w3-padding-16"><i class="fa fa-envelope"></i> Contact Us</a>
+          </div>
+        </nav>
+
+        <!-- Top menu on small screens -->
+        <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+          <span class="w3-bar-item">Rental</span>
+          <a href="javascript:void(0)" class="w3-right w3-bar-item w3-button" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+        </header>
+
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main w3-white" style="margin-left:260px">
+
+          <!-- Push down content on small screens -->
+          <div class="w3-hide-large" style="margin-top:80px"></div>
+
+          <div class="w3-container" id="apartment">
+
+              <h1 class="w3-text-green"style="margin-bottom: 48px;">
+                  <a href="{% url 'index:index' %}" class="w3-button">
+                  Caravaggio 2
+                  </a>
+              </h1>
+
+{% block main_content %}
+
+{% endblock main_content %}
+
+          </div>
+
+{% block additional_content %}
+
+{% endblock additional_content %}
+
+{% block contact_us %}
+
+          <hr>
+
+          <!-- Contact Us -->
+          <div class="w3-container" id="contact-us">
+            <h2>Contact Us</h2>
+            <i class="fa fa-map-marker" style="width:30px"></i> Milan, Italy<br>
+            <i class="fa fa-phone" style="width:30px"></i> Phone: +39 3283339894<br>
+            <i class="fa fa-envelope" style="width:30px"> </i> Email: caravaggio2segrate@gmail.com<br>
+            <p>Questions? Go ahead, ask them:</p>
+            <form action="/action_page.php" target="_blank">
+              <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+              <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+            <button type="submit" class="w3-button w3-green w3-third">Send a Message</button>
+            </form>
+          </div>
+
+{% endblock contact_us %}
+
+          <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></footer>
+
+        <!-- End page content -->
+        </div>
+
+{% block script %}
+
+{% endblock script %}
+
+    </body>
+
+</html>

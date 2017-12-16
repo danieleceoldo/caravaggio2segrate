@@ -1,0 +1,56 @@
+
+{% extends "index/base.html" %}
+
+{% block checkin_defval %}
+    value="{{ checkinstr }}"
+{% endblock %}
+
+{% block checkout_defval %}
+    value="{{ checkoutstr }}"
+{% endblock %}
+
+{% block adults_defval %}
+    value="{{ adultsstr }}"
+{% endblock %}
+
+{% block kids_defval %}
+    value="{{ kidsstr }}"
+{% endblock %}
+
+
+{% block main_content %}
+
+              <!-- Availability  -->
+
+              {% if booknow %}
+              <div class="w3-padding-32 w3-large">
+                <p>The requested dates:</p>
+                <div class="w3-margin-top w3-margin-bottom">
+                    <p>Check In: {{ checkindate }}</p>
+                    <p>Check Out: {{ checkoutdate }}</p>
+                </div>
+                <p>are <b><i class="w3-bold">available!</i></b></p>
+              </div>
+
+              <form action="/action_page.php" target="_blank">
+              <div class="w3-row" style="margin-bottom: 64px;">
+                  <div class="w3-third">
+                      <p></p>
+                  </div>
+                  <button type="submit" class="w3-button w3-green w3-third">
+                      Book Now
+                  </button>
+              </div>
+              </form>
+
+              {% else %}
+
+              {% for checkdate, checkresult in availability_list %}
+                  <p>{{ checkdate }}: {{ checkresult }}</p>
+              {% endfor %}
+
+              {% endif %}
+
+              <a href="{% url 'index:index' %}" class="w3-bar-item w3-button"><i class="fa fa-home w3-xlarge"></i><i class="fa fa-arrow-left w3-xlarge"></i></a>
+
+{% endblock main_content %}
